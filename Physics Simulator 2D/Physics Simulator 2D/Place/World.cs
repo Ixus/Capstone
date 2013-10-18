@@ -42,10 +42,22 @@ namespace Physics_Simulator_2D.Place
         {
             foreach (PhysicalPoint o in ObjectList)
             {
-                if (o.Location.X < 0) o.Velocity.X *= -1 * o.Elasticity;
-                if (o.Location.X > Width) o.Velocity.X *= -1 * o.Elasticity;
-                if (o.Location.Y < 0) o.Velocity.Y *= -1 * o.Elasticity;
-                if (o.Location.Y > Height) o.Velocity.Y *= -1 * o.Elasticity;
+                if (o.Shape().Equals("Point"))
+                {
+                    if (o.Location.X < 0) o.Velocity.X *= -1 * o.Elasticity;
+                    if (o.Location.X > Width) o.Velocity.X *= -1 * o.Elasticity;
+                    if (o.Location.Y < 0) o.Velocity.Y *= -1 * o.Elasticity;
+                    if (o.Location.Y > Height) o.Velocity.Y *= -1 * o.Elasticity;
+                }
+                else if (o.Shape().Equals("Circle"))
+                {
+                    Circle o2 = (Circle)o;
+                    if (o.Location.X - o2.Diameter < 0) o.Velocity.X *= -1 * o.Elasticity;
+                    if (o.Location.X + o2.Diameter > Width) o.Velocity.X *= -1 * o.Elasticity;
+                    if (o.Location.Y - o2.Diameter < 0) o.Velocity.Y *= -1 * o.Elasticity;
+                    if (o.Location.Y + o2.Diameter > Height) o.Velocity.Y *= -1 * o.Elasticity;
+                }
+                
             }
         }
 

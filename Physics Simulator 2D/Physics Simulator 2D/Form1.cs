@@ -32,7 +32,7 @@ namespace Physics_Simulator_2D
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
-            PhysicalPoint o = new PhysicalPoint(e.X, panel1.Height - e.Y, 40, 40, 0, 0, 10, Color.Black);
+            Circle o = new Circle(8, e.X, panel1.Height - e.Y, 40, 0, 0, 0, 10, Color.Gray);
             MyWorld.AddObject(o);
         }
 
@@ -49,11 +49,20 @@ namespace Physics_Simulator_2D
             List<PhysicalPoint> objectList = MyWorld.GetObjectList();
 
             Graphics g = panel1.CreateGraphics();
-
+            
             foreach (PhysicalPoint o in objectList)
-            {               
+            {
                 MyBrush = new SolidBrush(o.BasicColor);
-                g.FillEllipse(MyBrush, (int)o.Location.X, panel1.Height - (int)o.Location.Y, PhysicalPoint.DefaultDiamater, PhysicalPoint.DefaultDiamater);               
+
+                if (o.Shape().Equals("Point"))
+                {                   
+                    g.FillEllipse(MyBrush, (int)o.Location.X, panel1.Height - (int)o.Location.Y, 4, 4);
+                }
+                else if (o.Shape().Equals("Circle"))
+                {
+                    Circle o2 = (Circle)o;
+                    g.FillEllipse(MyBrush, (int)o.Location.X, panel1.Height - (int)o.Location.Y, (int)o2.Diameter, (int)o2.Diameter);
+                }                             
             }
 
             g.Dispose();

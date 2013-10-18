@@ -16,7 +16,6 @@ namespace Physics_Simulator_2D.Objects
         public Double Mass;
         public Double Elasticity = 0.7;
         public Color BasicColor;
-        public static int DefaultDiamater = 4;
 
         public PhysicalPoint() {}
 
@@ -35,6 +34,11 @@ namespace Physics_Simulator_2D.Objects
             Acceleration = new Vector2D(aX, vY);
             Mass = mass;
             BasicColor = color;
+        }
+
+        public virtual string Shape()
+        {
+            return "Point";
         }
     }
 }
