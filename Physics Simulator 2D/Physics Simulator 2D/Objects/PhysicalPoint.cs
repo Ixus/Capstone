@@ -14,6 +14,7 @@ namespace Physics_Simulator_2D.Objects
         public Vector2D Velocity;
         public Vector2D Acceleration;
         public Double Mass;
+        public Double Elasticity = 0.7;
         public Color BasicColor;
         public static int DefaultDiamater = 4;
 

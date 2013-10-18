@@ -12,6 +12,8 @@ namespace Physics_Simulator_2D.Place
         Double Width;
         Double Height;
         Double Gravity;
+        Double BorderElasticity;
+        bool BorderEnabled = true;
         List<PhysicalPoint> ObjectList = new List<PhysicalPoint>();
         // future: time intervals for update
 
@@ -30,6 +32,18 @@ namespace Physics_Simulator_2D.Place
                 o.Location.X += (o.Velocity.X * time);
                 o.Location.Y += (o.Velocity.Y * time);
                 o.Velocity.Y = o.Velocity.Y + (Gravity * time);
+            }
+            WorldBorderCollision(time);
+        }
+
+        public void WorldBorderCollision(Double time)
+        {
+            foreach (PhysicalPoint o in ObjectList)
+            {
+                if (o.Location.X < 0) o.Velocity.X *= -1 * o.Elasticity;
+                if (o.Location.X > Width) o.Velocity.X *= -1 * o.Elasticity;
+                if (o.Location.Y < 0) o.Velocity.Y *= -1 * o.Elasticity;
+                if (o.Location.Y > Height) o.Velocity.Y *= -1 * o.Elasticity;
             }
         }
 

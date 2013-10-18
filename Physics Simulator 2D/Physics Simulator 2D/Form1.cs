@@ -30,7 +30,7 @@ namespace Physics_Simulator_2D
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
-            PhysicalPoint o = new PhysicalPoint(e.X, panel1.Height - e.Y, 20, 20, 0, 0, 10, Color.Black);
+            PhysicalPoint o = new PhysicalPoint(e.X, panel1.Height - e.Y, 40, 40, 0, 0, 10, Color.Black);
             MyWorld.AddObject(o);
         }
 
