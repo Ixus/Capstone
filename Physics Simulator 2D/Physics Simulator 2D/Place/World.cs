@@ -28,7 +28,7 @@ namespace Physics_Simulator_2D.Place
         {
             foreach(PhysicalPoint o in ObjectList) {
                 o.Location.X += (o.Velocity.X * time);
-                o.Location.Y += (o.Velocity.X * time);
+                o.Location.Y += (o.Velocity.Y * time);
                 o.Velocity.Y = o.Velocity.Y + (Gravity * time);
             }
         }
