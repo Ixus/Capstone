@@ -26,6 +26,8 @@ namespace Physics_Simulator_2D
             timer1.Interval = TimeInverval;
             timer1.Enabled = true;
             MyWorld = new World(panel1.Width, panel1.Height);
+
+            option_Trace.Checked = true;
         }
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
@@ -38,7 +40,7 @@ namespace Physics_Simulator_2D
         {
             Double time = (Double)TimeInverval;
             MyWorld.Update(time/1000D);
-            //Clear();
+            if(option_Trace.Checked == false) Clear();
             Draw();
         }
 
@@ -61,6 +63,26 @@ namespace Physics_Simulator_2D
         {
             Graphics g = panel1.CreateGraphics();
             g.Clear(panel1.BackColor);
+        }
+
+        private void option_PlayPause_Click(object sender, EventArgs e)
+        {
+            if (MyWorld.Play)
+            {
+                MyWorld.Play = false;
+                option_PlayPause.Text = ">";
+            }
+            else
+            {
+                MyWorld.Play = true;
+                option_PlayPause.Text = "||";
+            }
+        }
+
+        private void option_Clear_Click(object sender, EventArgs e)
+        {
+            MyWorld.Clear();
+            Clear();
         }
     }
 }

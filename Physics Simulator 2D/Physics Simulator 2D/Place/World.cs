@@ -12,8 +12,9 @@ namespace Physics_Simulator_2D.Place
         Double Width;
         Double Height;
         Double Gravity;
-        Double BorderElasticity;
-        bool BorderEnabled = true;
+        public Double BorderElasticity = 1;
+        public bool BorderEnabled = true;
+        public bool Play = true;
         List<PhysicalPoint> ObjectList = new List<PhysicalPoint>();
         // future: time intervals for update
 
@@ -28,6 +29,7 @@ namespace Physics_Simulator_2D.Place
 
         public void Update(Double time)
         {
+            if (!Play) return;
             foreach(PhysicalPoint o in ObjectList) {
                 o.Location.X += (o.Velocity.X * time);
                 o.Location.Y += (o.Velocity.Y * time);
@@ -54,6 +56,11 @@ namespace Physics_Simulator_2D.Place
         public List<PhysicalPoint> GetObjectList()
         {
             return ObjectList;
+        }
+
+        public void Clear()
+        {
+            ObjectList.Clear();
         }
     }
 }
