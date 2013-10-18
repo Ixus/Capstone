@@ -19,6 +19,8 @@ namespace Physics_Simulator_2D
         private World MyWorld;
         private SolidBrush MyBrush;
         private int TimeInverval = 100;
+        private bool IsMouseDown = false;
+        private Point MouseDownPoint;
 
         public Form1()
         {
@@ -32,7 +34,10 @@ namespace Physics_Simulator_2D
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
-            Circle o = new Circle(8, e.X, panel1.Height - e.Y, 40, 0, 0, 0, 10, Color.Gray);
+            int diam = 8;
+            int x = MouseDownPoint.X;
+            int y = MouseDownPoint.Y;
+            Circle o = new Circle(diam, x - diam, panel1.Height - y + (diam / 2), 40, 0, 0, 0, 10, Color.FromArgb(255, 0, 0, 0));
             MyWorld.AddObject(o);
         }
 
@@ -62,6 +67,7 @@ namespace Physics_Simulator_2D
                 {
                     Circle o2 = (Circle)o;
                     g.FillEllipse(MyBrush, (int)o.Location.X, panel1.Height - (int)o.Location.Y, (int)o2.Diameter, (int)o2.Diameter);
+                    Console.WriteLine(o2.GetAngleDegrees());
                 }                             
             }
 
@@ -92,6 +98,28 @@ namespace Physics_Simulator_2D
         {
             MyWorld.Clear();
             Clear();
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = true;
+            MouseDownPoint = new Point(e.X, e.Y);
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = false;
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (IsMouseDown)
+            {
+                Clear();
+                Graphics g = panel1.CreateGraphics();
+                Pen pen = new Pen(new SolidBrush(Color.Gray), 2);
+                g.DrawLine(pen, MouseDownPoint, new Point(e.X, e.Y));
+            }
         }
     }
 }

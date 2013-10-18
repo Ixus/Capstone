@@ -40,5 +40,15 @@ namespace Physics_Simulator_2D.Objects
         {
             return "Point";
         }
+
+        public double GetAngle()
+        {
+            return Math.Atan2(Velocity.Y, Velocity.X);
+        }
+
+        public double GetAngleDegrees()
+        {
+            return GetAngle() * 100/Math.PI;
+        }
     }
 }
